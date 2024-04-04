@@ -1,5 +1,5 @@
 # Spectral_indices
-A seletion of spectral indices for Sentinel-2 Level-2A imagery
+A selection of spectral indices for Sentinel-2 Level-2A imagery
 
 Juan Andrade Rivera
 linkedin: linkedin.com/in/juan-andriv
