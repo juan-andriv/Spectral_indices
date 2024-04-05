@@ -41,7 +41,8 @@ The indices calculated in this project are descsribed below.
 
 The final output is an array of maps showcasing each index.
 
-![Spectral_Indices](https://github.com/juan-andriv/Spectral_indices/assets/163057641/434c7893-11dd-4ec2-9a81-551ec68c2936)
+![Spectral_Indices](https://github.com/juan-andriv/Spectral_indices/assets/163057641/fc4eb314-266c-46f6-bcb3-8ac89398c714)
+
 
 
 
