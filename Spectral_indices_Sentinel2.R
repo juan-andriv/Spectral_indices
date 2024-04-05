@@ -1,7 +1,7 @@
 ### SPECTRAL INDICES ### ----
 ### Juan Andrade Rivera
 ### linkedin: linkedin.com/in/juan-andriv
-### 02.04.2024
+### 02.05.2024
 
 ### On data ----
 ### Developed for Sentinel 2 Level-2A satellite imagery
@@ -41,11 +41,11 @@ library(rasterVis) # for plotting maps using ggplot2 syntax
 # so those are the ones I put inside the source folder
 # b08 is replaced with b8A, as is the one available at 20m resolution
 
-jp2_list <- list.files("source", pattern = ".jp2", full.names = TRUE) # pull jp2 files
+jp2_list <- list.files("source/Stadt_Koeln", pattern = ".jp2", full.names = TRUE) # pull jp2 files
 raster_list <- lapply(jp2_list, raster) # transform to raster
 
 # Crop the rasters to desired extension, I used a shapefile
-shapefile <- shapefile("source/shp/AMM.shp") # if necessary change CRS to match the image
+shapefile <- shapefile("source/Stadt_Koeln/Innenstadt.shp") # if necessary change CRS to match the image
 c_raster_list <- lapply(raster_list, function(r) crop(r, shapefile))
 
 # Rename objects
@@ -59,7 +59,7 @@ list2env(c_raster_list, envir = .GlobalEnv) # global environment is the general 
 
 # creating an RGB image ----
 rgb <- stack(list(b04,b03,b02))
-plotRGB(rgb, axes = TRUE, stretch = "lin", main = "Monterrey Metropolitan Area (AMM)") +
+plotRGB(rgb, axes = TRUE, stretch = "lin", main = "Satellite view") +
   plot(shapefile, add = TRUE, border = "red", lwd = 2) # add shapefile with outline for AMM area
 
 ### INDICES ### ----
@@ -78,7 +78,7 @@ plot(ndvi, main = "NDVI", col = colorRampPalette(c("brown", "khaki", "darkgreen"
 # 0 bare soil or water 
 # +1 for urban areas
 ndbi <- (b11 - b08) / (b11 + b08)
-plot(ndbi, main = "NDBI", col = colorRampPalette(c("midnightblue", "lightblue", "ivory", "indianred1", "red4"))(256)) +
+plot(ndbi, main = "NDBI", col = colorRampPalette(c("darkslategray", "ivory", "indianred2", "red4"))(256)) +
   theme_minimal() +
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
@@ -87,7 +87,7 @@ plot(ndbi, main = "NDBI", col = colorRampPalette(c("midnightblue", "lightblue", 
 # 0 typical moisture content in vegetation
 # +1 well watered vegetation
 ndmi <- (b08 - b11) / (b08 + b11)
-plot(ndmi, main = "NDMI", col = colorRampPalette(c("chocolate4", "orange", "white", "lightblue", "midnightblue"))(256)) +
+plot(ndmi, main = "NDMI", col = colorRampPalette(c("khaki4", "ivory", "midnightblue"))(256)) +
   theme_minimal() +
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
@@ -96,7 +96,7 @@ plot(ndmi, main = "NDMI", col = colorRampPalette(c("chocolate4", "orange", "whit
 # 0 dry land 
 # +1 water bodies
 ndwi <- (b03 - b08) / (b03 + b08)
-plot(ndwi, main = "NDWI", col = colorRampPalette(c("black", "gray","white", "lightblue", "darkblue"))(256)) +
+plot(ndwi, main = "NDWI", col = colorRampPalette(c("black", "grey","ivory", "midnightblue"))(256)) +
   theme_minimal() +
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
@@ -104,7 +104,7 @@ plot(ndwi, main = "NDWI", col = colorRampPalette(c("black", "gray","white", "lig
 # -1 soils with high organic matter, moist, clay
 # +1 soils with low organic matter, dry, sandy
 sbi <- (b11 - b04) / (b11 + b04)
-plot(sbi, main = "SBI", col = colorRampPalette(c("saddlebrown", "ivory", "yellow3"))(256)) +
+plot(sbi, main = "SBI", col = colorRampPalette(c("black","tan4", "wheat", "ivory"))(256)) +
   theme_minimal() +
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
@@ -122,19 +122,19 @@ plot(ndvi, main = "NDVI - Normalized Difference Vegetation Index", col = colorRa
   theme_minimal() +
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
-plot(ndbi, main = "NDBI - Normalized Difference Built-up Index", col = colorRampPalette(c("midnightblue", "lightblue", "ivory", "indianred1", "red4"))(256)) +
+plot(ndbi, main = "NDBI - Normalized Difference Built-up Index", col = colorRampPalette(c("darkslategray", "ivory", "indianred2", "red4"))(256)) +
   theme_minimal() +
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
-plot(ndmi, main = "NDMI - Normalized Difference Moisture Index", col = colorRampPalette(c("chocolate4", "orange", "white", "lightblue", "midnightblue"))(256)) +
+plot(ndmi, main = "NDMI - Normalized Difference Moisture Index", col = colorRampPalette(c("khaki4", "ivory", "midnightblue"))(256)) +
   theme_minimal() +
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
-plot(ndwi, main = "NDWI - Normalized Difference Water Index", col = colorRampPalette(c("black", "gray","white", "lightblue", "darkblue"))(256)) +
+plot(ndwi, main = "NDWI - Normalized Difference Water Index", col = colorRampPalette(c("black", "grey","ivory", "midnightblue"))(256)) +
   theme_minimal() +
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
-plot(sbi, main = "SBI - Soil Brightness Index", col = colorRampPalette(c("saddlebrown", "ivory", "yellow3"))(256)) +
+plot(sbi, main = "SBI - Soil Brightness Index", col = colorRampPalette(c("black","tan4", "wheat", "ivory"))(256)) +
   theme_minimal() +
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
