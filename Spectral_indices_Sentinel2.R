@@ -109,7 +109,6 @@ plot(sbi, main = "SBI", col = colorRampPalette(c("black","tan4", "wheat", "ivory
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
 ## Print in a facet view ----
-pdf("Spectral_Indices.pdf", width = 11.7, height = 16.5) # set pdf parameters
 png("Spectral_Indices.png", width = 11.7*100, height = 16.5*100, res = 100) # Set png parameters
 
 par(mfrow = c(3, 2)) # Organize plots in 3 rows and 2 columns
@@ -139,5 +138,5 @@ plot(sbi, main = "SBI - Soil Brightness Index", col = colorRampPalette(c("black"
   plot(shapefile, add = TRUE, border = "red", lwd = 2)
 
 par(mfrow = c(1, 1)) # Reset the plotting layout to default
-dev.off() # close pdf device and save plot
+dev.off() # close png device and save plot
 
